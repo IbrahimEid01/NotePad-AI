@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, required this.title, required this.icon});
+
+  final String title;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +14,8 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'NotePad AI',
+           Text(
+            title,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Container(
@@ -21,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: IconButton(
-              icon: const Icon(Icons.search, color: Colors.white, size: 30),
+              icon:  Icon(icon, color: Colors.white, size: 30),
               onPressed: () {
                 // Handle settings button press
               },
