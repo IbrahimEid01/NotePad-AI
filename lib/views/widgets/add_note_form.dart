@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubit/add_note_cubit/add_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
+import 'package:note_app/views/widgets/color_item_list_view.dart';
 import 'package:note_app/views/widgets/coustom_buttom.dart';
 import 'package:note_app/views/widgets/coustom_text_field.dart';
 
@@ -41,6 +42,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             maxlines: 5,
           ),
           SizedBox(height: 32),
+          ColorListView(),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButtom(
@@ -49,12 +51,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     var currentDate = DateTime.now();
-                    var formattedCurrentData = 
-                    DateFormat('dd / mm / yy').format(currentDate);
+                    var formattedCurrentData = DateFormat(
+                      'dd / mm / yy',
+                    ).format(currentDate);
                     var noteModel = NotePadAiModel(
                       title: title!,
                       subTitle: subTitle!,
-                      date:formattedCurrentData,
+                      date: formattedCurrentData,
                       color: Colors.blueAccent.value,
                     );
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
@@ -71,3 +74,4 @@ class _AddNoteFormState extends State<AddNoteForm> {
     );
   }
 }
+
