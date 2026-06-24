@@ -6,17 +6,17 @@ part of 'note_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NotPadAiModelAdapter extends TypeAdapter<NotPadAiModel> {
+class NotPadAiModelAdapter extends TypeAdapter<NotePadAiModel> {
   @override
   final int typeId = 0;
 
   @override
-  NotPadAiModel read(BinaryReader reader) {
+  NotePadAiModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return NotPadAiModel(
+    return NotePadAiModel(
       title: fields[0] as String,
       subTitle: fields[1] as String,
       date: fields[2] as String,
@@ -25,7 +25,7 @@ class NotPadAiModelAdapter extends TypeAdapter<NotPadAiModel> {
   }
 
   @override
-  void write(BinaryWriter writer, NotPadAiModel obj) {
+  void write(BinaryWriter writer, NotePadAiModel obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
