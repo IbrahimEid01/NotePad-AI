@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_app/constant.dart';
+import 'package:note_app/cubit/notes_cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/simple_bloc_observer.dart';
 import 'package:note_app/views/notepad_view.dart';
@@ -11,7 +12,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(NotPadAiModelAdapter());
   await Hive.openBox<NotePadAiModel>(kNoteBox);
-
+ 
   runApp(const NotePadAI());
 }
 
@@ -20,10 +21,13 @@ class NotePadAI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
-      home: SafeArea(child: Scaffold(body: NotePadAlView())),
+    return BlocProvider(
+      create : (context) => NotesCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
+        home: SafeArea(child: Scaffold(body: NotePadAlView())),
+      ),
     );
   }
 }

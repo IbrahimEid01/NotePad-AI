@@ -50,12 +50,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     formKey.currentState!.save();
                     var currentDate = DateTime.now();
                     var formattedCurrentData = 
-                    DateFormat.(dd / mm).format(currentDate);
-
+                    DateFormat('dd / mm / yy').format(currentDate);
                     var noteModel = NotePadAiModel(
                       title: title!,
                       subTitle: subTitle!,
-                      date: DateTime.now().toString(),
+                      date:formattedCurrentData,
                       color: Colors.blueAccent.value,
                     );
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);

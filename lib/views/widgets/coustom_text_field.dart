@@ -1,20 +1,23 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:note_app/constant.dart';
 
 class CoustomTextField extends StatelessWidget {
-  const CoustomTextField({super.key, required this.hint,  this.maxlines =1, this.onSaved});
+  const CoustomTextField({
+    super.key,
+    required this.hint,
+    this.maxlines = 1,
+    this.onSaved, this.onChanged,
+  });
 
   final String hint;
   final int maxlines;
   final void Function(String?)? onSaved;
-
-
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       onSaved: onSaved,
       validator: (value) {
         if (value?.isEmpty ?? true) {
@@ -23,21 +26,19 @@ class CoustomTextField extends StatelessWidget {
           return null;
         }
       },
-      
-            cursorColor: kPrimaryColor,
-            maxLines: maxlines,
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: TextStyle(color: kPrimaryColor),
-              border: buildBorder(),
-              enabledBorder: buildBorder(),
-              focusedBorder: buildBorder(kPrimaryColor),
-            ),
-          );
 
-
+      cursorColor: kPrimaryColor,
+      maxLines: maxlines,
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(color: kPrimaryColor),
+        border: buildBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(kPrimaryColor),
+      ),
+    );
   }
-  
+
   OutlineInputBorder buildBorder([color]) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),

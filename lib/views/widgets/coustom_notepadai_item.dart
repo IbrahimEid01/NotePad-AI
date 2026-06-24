@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubit/notes_cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/widgets/edit_note_view.dart';
 
@@ -14,7 +16,9 @@ class NotePadAiItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return const EditNoteView();
+              return EditNoteView(
+                note : note,
+              );
             },
           ),
         );
@@ -31,7 +35,7 @@ class NotePadAiItem extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-              title:  Text(
+              title: Text(
                 note.title,
                 style: TextStyle(
                   fontSize: 26,
@@ -55,7 +59,10 @@ class NotePadAiItem extends StatelessWidget {
                   color: Colors.black,
                   size: 38,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  note.delete();
+                  BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                },
               ),
             ),
             Padding(
